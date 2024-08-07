@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stake</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      var im = /(iPhone|iPad|iPod|iOS|Android)/i.test(window.navigator.userAgent);
+      function adjust() {
+        setTimeout(() => {
+          var $a = document.querySelector('#root');
+          $a.setAttribute('style', !im? 'max-width: 375px' : '');
+        }, 0)
+      }
+      function setFontSizeByWidth(designWidth) {
+        var designWidthRatio = 100 / designWidth;
+        var screenWidth = !im ? designWidth : window.innerWidth || document.documentElement.clientWidth;
+        var screenWidthRatio = screenWidth * designWidthRatio / 100;
+        document.documentElement.style.fontSize = screenWidthRatio + 'px';
+      }
+
+      function init() {
+        adjust();
+        setFontSizeByWidth(375);
+      }
+      init();
+      window.addEventListener('resize', init);
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
